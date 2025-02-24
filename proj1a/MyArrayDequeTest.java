@@ -7,11 +7,11 @@ public class MyArrayDequeTest {
         ArrayDeque L = new ArrayDeque();
         int expected = 2;
         L.addFirst(2);
-        int actual = (int)L.get(0);
+        int actual = (int)L.getItem(0);
         assertEquals(expected, actual);
         L.addFirst(3);
         expected = 3;
-        actual = (int)L.get(0);
+        actual = (int)L.getItem(0);
         assertEquals(expected, actual);
 
         L.addFirst(4);
@@ -25,10 +25,10 @@ public class MyArrayDequeTest {
     public void testAddLast(){
         ArrayDeque L=new ArrayDeque();
         L.addLast(10);
-        assertEquals(10,L.get(L.size()-1));
+        assertEquals(10,L.getItem(L.size()-1));
 
         L.addLast(11);
-        assertEquals(11,L.get(L.size()-1));
+        assertEquals(11,L.getItem(L.size()-1));
 
         L.addLast(12);
 
@@ -51,8 +51,8 @@ public class MyArrayDequeTest {
         int temp;
         int returnValue;
         for(int i=1;i<15;i++){
-            temp=(int)L.get(0);
-            returnValue=(int)L.removeFirst();
+            temp=(int)L.getItem(0);
+            returnValue=(int)L.RemoveFirst();
             assertEquals(temp,returnValue);
         }
 
