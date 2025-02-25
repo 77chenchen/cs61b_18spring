@@ -62,6 +62,19 @@ public class ArrayDeque <T>{
         }
         return item[first+index+1];
      }
+     public void shrinkSize(){
+        int frontEmpty = first + 1 ;
+        int lastEmpty = item.length - last;
+        int oldFirst = first;
+        int shrinkFront = frontEmpty/2 ;
+        int shrinkLast = lastEmpty/2;
+        first = first - shrinkFront;
+        last = last - shrinkFront;
+        int new_length= item.length - shrinkFront - shrinkLast;
+        T[] array  = (T[]) new Object[new_length];
+        System.arraycopy(item,oldFirst+1,array,first+1,size);
+        item=array;
+     }
      public T RemoveFirst(){
         if(first+1==last){
             return null;
@@ -70,6 +83,10 @@ public class ArrayDeque <T>{
         T oldFirst = item[first];
         item[first] = null;
         size--;
+        double usage_rate = (1.0*size)/item.length;
+        if(usage_rate<0.25&&item.length>16){
+            shrinkSize();
+        }
         return oldFirst;
      }
      public T RemoveLast(){
@@ -79,6 +96,10 @@ public class ArrayDeque <T>{
         T oldLast = item[last-1];
         last--;
         size--;
+         double usage_rate = (1.0*size)/item.length;
+         if(usage_rate<=0.25&&item.length>16){
+             shrinkSize();
+         }
         return oldLast;
      }
 
