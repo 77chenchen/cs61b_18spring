@@ -56,7 +56,7 @@ public class ArrayDeque <T>{
         }
         System.out.print("\n");
      }
-     public T getItem(int index){
+     public T get(int index){
         if(index<0||index>=size){
             return null;
         }
