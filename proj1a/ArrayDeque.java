@@ -75,7 +75,7 @@ public class ArrayDeque <T>{
         System.arraycopy(item,oldFirst+1,array,first+1,size);
         item=array;
      }
-     public T RemoveFirst(){
+     public T removeFirst(){
         if(first+1==last){
             return null;
         }
@@ -89,7 +89,7 @@ public class ArrayDeque <T>{
         }
         return oldFirst;
      }
-     public T RemoveLast(){
+     public T removeLast(){
         if(size==0){
             return null;
         }

@@ -39,7 +39,7 @@ public class MyArrayDequeTest {
     }
 
     @Test
-    public void testRemoveFirst(){
+    public void testremoveFirst(){
 
         ArrayDeque L=new ArrayDeque();
         for(int i=1;i<10;i++){
@@ -52,7 +52,7 @@ public class MyArrayDequeTest {
         int returnValue;
         for(int i=1;i<15;i++){
             temp=(int)L.getItem(0);
-            returnValue=(int)L.RemoveFirst();
+            returnValue=(int)L.removeFirst();
             assertEquals(temp,returnValue);
         }
 
