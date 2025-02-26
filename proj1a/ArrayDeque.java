@@ -8,13 +8,13 @@ public class ArrayDeque <T>{
         first=4;
         last=5;
     }
-    public void increaseSizeofDequeFront(){
+    private void increaseSizeofDequeFront(){
         int biggerSize = (int)(item.length*1.5);
         int increasedSize = biggerSize - size;
         T[] array = (T[]) new Object[biggerSize];
         System.arraycopy(item,0,array,increasedSize,size);
-        first=first+increasedSize;
-        last=last+increasedSize;
+        first=first + increasedSize;
+        last=last + increasedSize;
         item= array;
     }
     public void addFirst(T i){
@@ -25,7 +25,7 @@ public class ArrayDeque <T>{
         first-=1;
         size++;
     }
-    public void increaseSizeofDequeLast(){
+    private void increaseSizeofDequeLast(){
         int biggerSize = (int)(item.length*1.5);
         int sizeIncreased = biggerSize - size;
         T[] array = (T[])new Object[biggerSize];
@@ -49,7 +49,7 @@ public class ArrayDeque <T>{
         }
         return false;
     }
-     public void print(){
+     public void printDeque(){
         for(int i=first+1;i<last;i++){
             System.out.print(item[i]);
             System.out.print(" ");
@@ -62,7 +62,7 @@ public class ArrayDeque <T>{
         }
         return item[first+index+1];
      }
-     public void shrinkSize(){
+     private void shrinkSize(){
         int frontEmpty = first + 1 ;
         int lastEmpty = item.length - last;
         int oldFirst = first;

@@ -23,7 +23,7 @@ public class MyArrayDequeTest {
 
     @Test
     public void testAddLast(){
-        ArrayDeque L=new ArrayDeque();
+        ArrayDeque L = new ArrayDeque();
         L.addLast(10);
         assertEquals(10,L.get(L.size()-1));
 
