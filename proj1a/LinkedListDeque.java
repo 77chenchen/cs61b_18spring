@@ -15,7 +15,7 @@ public class LinkedListDeque <T>{
         }
     }
     private int size;
-    public LinkedList Sentinel;
+    private LinkedList Sentinel;
     public LinkedListDeque(){
         Sentinel = new LinkedList();
         Sentinel.first=Sentinel;
