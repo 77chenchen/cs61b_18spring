@@ -1,185 +1,110 @@
-public class LinkedListDeque<Item> implements Deque<Item> {
-    private class LinkedList{
-        public LinkedList pre,next;
-        public Item items;
-
+public  class  LinkedListDeque<Item> implements Deque<Item>{
+    public class LinkedList{
+        public LinkedList first;
+        public LinkedList next;
+        public Item item;
         public LinkedList(){
-            pre=null;
-            next=null;
-            items=null;
+            first = null;
+            next = null;
+            item = null;
         }
-
-        public Item getItem(int index){
-            if(index==0)
-                return this.items;
-            return this.next.getItem(index-1);
-
+        public Item get_Index(int Index){
+            if (Index == 0) {
+                return this.item;
+            }
+            return this.next.get_Index(Index - 1);
         }
     }
-
-    private int size;
-    private LinkedList sentinel;
-
-    /**
-     * Create an empty linked list deque.
-     */
+    public int size;
+    public LinkedList Sentinel;
     public LinkedListDeque(){
-        sentinel=new LinkedList();
-        sentinel.pre=sentinel;
-        sentinel.next=sentinel;
-        size=0;
+        Sentinel = new LinkedList();
+        Sentinel.first = Sentinel;
+        Sentinel.next = Sentinel;
+        size = 0;
     }
-
-    /**
-     * adds an item of type T to the front of the deque.
-     * MUST not involve any looping or recursion.
-     * Execution SHOULD NOT depend on the size of the deque.
-     */
-
     @Override
     public void addFirst(Item i){
-        LinkedList rest=sentinel.next;
-
-        LinkedList L=new LinkedList();
-        L.items=i;
-        L.pre=sentinel;
-        sentinel.next=L;
-
-        L.next=rest;
-        rest.pre=L;
-
-        size=size+1;
+        LinkedList rest = Sentinel.next;
+        LinkedList L = new LinkedList();
+        L.item = i;
+        L.first = Sentinel;
+        L.next = rest;
+        Sentinel.next = L;
+        rest.first = L;
+        size++;
     }
-
-    /**
-     * adds an item of type T to the back of the deque.
-     * MUST not involve any looping or recursion.
-     * Execution SHOULD NOT depend on the size of the deque.
-     */
     @Override
     public void addLast(Item i){
-        LinkedList oldLast=sentinel.pre;
-
-        LinkedList L=new LinkedList();
-        L.items=i;
-        L.pre=oldLast;
-        oldLast.next=L;
-
-        L.next=sentinel;
-        sentinel.pre=L;
-
-        size=size+1;
+        LinkedList L = new LinkedList();
+        L.item = i;
+        LinkedList oldLast = Sentinel.first;
+        oldLast.next = L;
+        L.first = oldLast;
+        L.next = Sentinel;
+        Sentinel.first = L;
+        size++;
     }
-
-    /**
-     * Returns true if deque is empty, false otherwise.
-     */
     @Override
     public boolean isEmpty(){
-        if(size==0)
-            return true;
-
-        return false;
+        return size==0;
     }
-
-    /**
-     * returns teh number of items in the deque.
-     * MUST take constant time.
-     */
     @Override
     public int size(){
         return size;
     }
-
-    /**
-     * prints the items in the deque from  first to last,
-     * separated by a space.
-     */
     @Override
     public void printDeque(){
-        LinkedList printingItem=sentinel.next;
-        while(printingItem!=sentinel){
-            System.out.print(printingItem.items);
+        for(int i = 0; i < size;i ++){
+            System.out.print(get(i));
             System.out.print(" ");
-            printingItem=printingItem.next;
         }
         System.out.print("\n");
 
     }
 
-    /**
-     * removes and returns the item at the front of the deque.
-     * if no such item exists, return null.
-     * MUST not involve any looping or recursion.
-     * Execution SHOULD NOT depend on the size of the deque.
-     */
     @Override
     public Item removeFirst(){
-        if(size==0)
+        if(size==0){
             return null;
-
-        Item i=sentinel.next.items;
-
-        sentinel.next=sentinel.next.next;
-        sentinel.next.pre=sentinel;
-
-        size=size-1;
-
-        return i;
+        }else{
+            Item i= Sentinel.next.item;
+            Sentinel.next=Sentinel.next.next;
+            Sentinel.next.first=Sentinel;
+            size-=1;
+            return i;
+        }
     }
-
-    /**
-     * removes and returns the item at the back of the deque.
-     * if no such item exists, return null.
-     * MUST not involve any looping or recursion.
-     * Execution SHOULD NOT depend on the size of the deque.
-     */
     @Override
     public Item removeLast(){
-        if(size==0)
+        if(size==0){
             return null;
-
-        Item i=sentinel.pre.items;
-        sentinel.pre.pre.next=sentinel;
-        sentinel.pre=sentinel.pre.pre;
-
-        size=size-1;
-
-        return i;
+        }else{
+            Item i= Sentinel.first.item;
+            Sentinel.first=Sentinel.first.first;
+            Sentinel.first.next=Sentinel;
+            size-=1;
+            return i;
+        }
     }
-
-    /**
-     * gets the item at the given index, where 0 is the front,
-     * 1 is the next item, and so forth. if no such item exists,
-     * return null.
-     * MUST use iteration, not recursion.
-     */
     @Override
     public Item get(int index){
-        if(size==0 || index>=size)
+        if(size==0||index>size){
             return null;
-
-        LinkedList temp=sentinel;
-        int n=-1;
-        while(n<index){
-            temp=temp.next;
-            n++;
+        }else{
+            LinkedList temp = Sentinel;
+            while(index>0){
+                index-=1;
+                temp=temp.next;
+            }
+            return temp.next.item;
         }
-        return temp.items;
-
     }
-
-
-    /**
-     * gets the item at the given index, where 0 is the front,
-     * 1 is the next item, and so forth. if no such item exists,
-     * return null.
-     * MUST use recursion.
-     */
     @Override
     public Item getRecursive(int index){
-        if(size==0 || index>=size)
+        if(size==0||index>size){
             return null;
-        return sentinel.next.getItem(index);
+        }
+        return Sentinel.next.get_Index(index);
     }
 }
