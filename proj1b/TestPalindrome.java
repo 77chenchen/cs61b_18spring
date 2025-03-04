@@ -19,10 +19,10 @@ public class TestPalindrome {
     public void testisPalindrome(){
         assertTrue(palindrome.isPalindrome("a"));
         assertTrue(palindrome.isPalindrome(" "));
+        assertTrue(palindrome.isPalindrome(""));
         assertTrue(palindrome.isPalindrome("AjkjA"));
-        assertFalse(palindrome.isPalindrome("AjerjA"));
         assertFalse(palindrome.isPalindrome("AfjA"));
-
+        assertFalse(palindrome.isPalindrome("a,b c"));
         assertFalse(palindrome.isPalindrome("BjA"));
     }
 
